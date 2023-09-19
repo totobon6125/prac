@@ -1,0 +1,39 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Users {
+  userId    Int      @id @default(autoincrement()) @map("userId")
+  email     String   @unique @map("email")
+  password  String   @map("password")
+  createdAt DateTime @default(now()) @map("createdAt")
+  updatedAt DateTime @updatedAt @map("updatedAt")
+
+  Posts         Posts[] // 사용자(Users) 테이블과 게시글(Posts) 테이블이 1:N 관계를 맺습니다.
+
+  @@map("Users")
+}
+
+
+model Posts {
+  postId        Int      @id @default(autoincrement()) @map("postId")
+  UserId        Int      @map("UserId") // 사용자(Users) 테이블을 참조하는 외래키, 대문자인 이유도 참조하는 값임을 의미함.
+  relationship  String?  @map("relationship")
+  content       String   @db.Text@map("content") 
+
+  createdAt DateTime @default(now()) @map("createdAt")
+  updatedAt DateTime @updatedAt @map("updatedAt")
+
+  // Users 테이블과 관계를 설정합니다.
+  User     Users      @relation(fields: [UserId], references: [userId], onDelete: Cascade)
+
+  @@map("Posts")
+}
