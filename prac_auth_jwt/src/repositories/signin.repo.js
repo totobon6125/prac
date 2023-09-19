@@ -19,7 +19,7 @@ export class SignInRepo {
 
         const token = jwt.sign({ userId: signIn.userId },
             process.env.jwt_key,
-            { expiresIn: '1m' }
+            { expiresIn: '10m' }
         );
         return token;
     };

@@ -21,12 +21,23 @@ export class SignInCtr {
     //# 로그 아웃 API
     signOut = async (req, res, next) => {
         try {
-            const token = token = req.headers.authorization.split(' ')[1];
+            console.log(req.headers.cookie)
+            const token = req.headers.cookie.split(' ')[1];
             console.log(token)
 
-            return res.status(200).json({ "token": token });
+            return res.status(200).json({ Message: "로그아웃 성공" });
         } catch (err) {
             res.status(400).json({ errMessage: '이미 로그아웃 하셨습니다.' });
+        }
+    }
+
+    token = async (req, res, next) => {
+        try {
+            const token = req.headers.cookie;
+            console.log("토큰 확인", token)
+            return res.status(200).json({ Message: "토큰값 확인용" });
+        } catch (err) {
+            res.status(400).json({ errMessage: '확인 안됨 에러!!' });
         }
     }
 }

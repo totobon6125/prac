@@ -8,7 +8,7 @@ import SignInRouter from './signin.router.js';
 
 const router = express.Router()
 
-router.use('/', [SignUpRouter, SignInRouter])
-router.use('/', PostsRouter)
+router.use('/', [SignUpRouter, SignInRouter, PostsRouter])
+
 
 export default router;
