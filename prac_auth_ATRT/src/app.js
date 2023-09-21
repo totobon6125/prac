@@ -1,4 +1,5 @@
 import express from 'express';
+// cors 정책을 설정할 수 있는 모듈?
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv';
@@ -6,7 +7,6 @@ import dotenv from 'dotenv';
 import indexRouter from './routes/index.js';
 
 // .env 설치 해야 배포할 때 문제가 안 생김.
-// .env 파일 로드
 dotenv.config();
 
 const app = express();
